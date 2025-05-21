@@ -1,12 +1,11 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ProductModal from "./ProductModal";
 
-interface ProductCardProps {
+interface Product {
   id: string;
-  title: string;
+  name: string;
   price: number;
   image: string;
   platform: string;
@@ -14,7 +13,9 @@ interface ProductCardProps {
   rating?: number;
 }
 
-export default function ProductCard({ id, title, price, image, platform, url, rating }: ProductCardProps) {
+type ProductCardProps = Product;
+
+export default function ProductCard({ id, name, price, image, platform, url, rating }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -26,13 +27,13 @@ export default function ProductCard({ id, title, price, image, platform, url, ra
         <div className="aspect-square overflow-hidden">
           <img 
             src={image || "/placeholder.svg"} 
-            alt={title}
+            alt={name}
             className="h-full w-full object-cover transition-transform hover:scale-105"
           />
         </div>
         <CardContent className="p-4">
           <Badge variant="outline" className="mb-2">{platform}</Badge>
-          <h3 className="font-medium line-clamp-2 h-12">{title}</h3>
+          <h3 className="font-medium line-clamp-2 h-12">{name}</h3>
           <div className="mt-2 text-xl font-bold">${price.toLocaleString()}</div>
         </CardContent>
       </Card>
@@ -40,7 +41,7 @@ export default function ProductCard({ id, title, price, image, platform, url, ra
       <ProductModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={{ id, title, price, image, platform, url, rating }}
+        product={{ id, name, price, image, platform, url, rating }}
       />
     </>
   );

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,23 +11,23 @@ interface SearchFormProps {
 }
 
 export interface SearchParams {
-  minPrice: number;
-  maxPrice: number;
+  precioMin: number;
+  precioMax: number;
   category: string;
 }
 
 export default function SearchForm({ onSearch, className }: SearchFormProps) {
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    minPrice: 0,
-    maxPrice: 50000,
+    precioMin: 0,
+    precioMax: 50000,
     category: "",
   });
 
   const handlePriceChange = (min: number, max: number) => {
     setSearchParams(prev => ({
       ...prev,
-      minPrice: min,
-      maxPrice: max,
+      precioMin: min,
+      precioMax: max,
     }));
   };
 
@@ -49,8 +48,8 @@ export default function SearchForm({ onSearch, className }: SearchFormProps) {
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="space-y-8">
           <PriceRangeFilter 
-            minPrice={searchParams.minPrice} 
-            maxPrice={searchParams.maxPrice} 
+            minPrice={searchParams.precioMin} 
+            maxPrice={searchParams.precioMax} 
             onPriceChange={handlePriceChange} 
           />
           

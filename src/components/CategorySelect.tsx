@@ -12,7 +12,7 @@ import {
 
 const categories = [
   { value: "celulares", label: "Celulares" },
-  { value: "computadoras", label: "Computadoras" },
+  { value: "laptops", label: "Computadoras" },
   { value: "tablets", label: "Tablets" },
 ];
 

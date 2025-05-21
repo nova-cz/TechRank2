@@ -11,7 +11,7 @@ interface ProductModalProps {
   onClose: () => void;
   product: {
     id: string;
-    title: string;
+    name: string; // ✅ CAMBIAR 'title' por 'name'
     price: number;
     image: string;
     platform: string;
@@ -19,6 +19,7 @@ interface ProductModalProps {
     rating?: number;
   };
 }
+
 
 interface Review {
   id: string;
@@ -107,7 +108,7 @@ export default function ProductModal({ isOpen, onClose, product }: ProductModalP
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="sr-only">{product.title}</DialogTitle>
+          <DialogTitle className="sr-only">{product.name}</DialogTitle>
         </DialogHeader>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -115,14 +116,14 @@ export default function ProductModal({ isOpen, onClose, product }: ProductModalP
           <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
             <img 
               src={product.image} 
-              alt={product.title} 
+              alt={product.name} 
               className="h-full w-full object-cover"
             />
           </div>
           
           {/* Detalles del producto */}
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">{product.title}</h2>
+            <h2 className="text-2xl font-bold">{product.name}</h2>
             <div className="flex items-center">
               {renderReviewStars(product.rating || 4.5)}
               <span className="ml-2 text-sm text-muted-foreground">

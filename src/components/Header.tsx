@@ -1,35 +1,29 @@
-
 import { Link } from "react-router-dom";
 import { ShoppingBag, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { 
+import { ThemeToggle } from "@/components/ThemeToggle"; // named import correcto
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function Header() {
-  const isLoggedIn = false; // Esta variable se actualizará con la implementación real de autenticación
+  const isLoggedIn = false;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <div className="flex items-center gap-6 md:gap-8 lg:gap-10">
-          <Link to="/" className="flex items-center gap-2 font-semibold">
-            <ShoppingBag className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">TechRank</span>
-          </Link>
-          
+        {/* Logo a la izquierda */}
+        <Link to="/" className="flex items-center gap-2 font-semibold">
+          <ShoppingBag className="h-6 w-6 text-primary" />
+          <span className="text-xl font-bold">TechRank</span>
+        </Link>
+
+        {/* Navegación a la derecha */}
+        <div className="flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/productos" className="text-sm font-medium transition-colors hover:text-primary">
-              Productos
-            </Link>
-            <Link to="/ranking" className="text-sm font-medium transition-colors hover:text-primary">
-              Ranking
-            </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center gap-1 py-1 px-2">
@@ -37,37 +31,40 @@ export default function Header() {
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-48 bg-background/95 backdrop-blur border-white/10">
+              <DropdownMenuContent
+                align="end"
+                className="w-48 bg-background/95 backdrop-blur border-white/10"
+              >
                 <DropdownMenuItem asChild>
-                  <Link to="/categoria/celulares" className="cursor-pointer">Celulares</Link>
+                  <Link to="/categoria/celulares" className="cursor-pointer">
+                    Celulares
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/categoria/tablets" className="cursor-pointer">Tablets</Link>
+                  <Link to="/categoria/tablets" className="cursor-pointer">
+                    Tablets
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/categoria/computadoras" className="cursor-pointer">Computadoras</Link>
+                  <Link to="/categoria/computadoras" className="cursor-pointer">
+                    Computadoras
+                  </Link>
+                  
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
+          <Link
+              to="/ranking"
+              className="text-sm font-medium transition-colors hover:text-primary"
+            >
+              Ranking
+            </Link>
+          {/* Botón de inicio de sesión / registro */}
+          {/* Modo oscuro / claro */}
+          <ThemeToggle />
         </div>
         
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
-          {isLoggedIn ? (
-            <Button variant="ghost" size="icon" asChild className="rounded-full">
-              <Link to="/perfil">
-                <Avatar>
-                  <AvatarFallback>US</AvatarFallback>
-                </Avatar>
-              </Link>
-            </Button>
-          ) : (
-            <Button variant="default" size="sm" asChild>
-              <Link to="/login">Iniciar Sesión</Link>
-            </Button>
-          )}
-        </div>
       </div>
     </header>
   );
